@@ -83,6 +83,8 @@
   <node name="Navigator" pkg="nav2d_navigator" type="navigator">
 		<rosparam file="$(find nav2d_tutorials)/param/navigator.yaml"/>
 	</node>
+ 
+
 
   
 

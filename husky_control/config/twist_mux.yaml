@@ -11,8 +11,13 @@ topics:
   topic   : cmd_vel
   timeout : 0.5
   priority: 1
+- name    : move
+  topic   : move_base
+  timeout : 0.5
+  priority : 5
 locks:
 - name    : e_stop
   topic   : e_stop
   timeout : 0.0
   priority: 255
+
