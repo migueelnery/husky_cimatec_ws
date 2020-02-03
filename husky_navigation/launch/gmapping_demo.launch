@@ -33,27 +33,4 @@ ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSI
   <!--- Run Move Base -->
   <include file="$(find husky_navigation)/launch/move_base.launch" />
 
-  <rosparam file="$(find nav2d_tutorials)/param/ros.yaml"/>
-
-  <node name="Operator" pkg="nav2d_operator" type="operator" >
-		<remap from="scan" to="scan"/>
-		<rosparam file="$(find nav2d_tutorials)/param/operator.yaml"/>
-		<rosparam file="$(find nav2d_tutorials)/param/costmap.yaml" ns="local_map" />
-	</node>
-
-  <!-- <node name="Mapper" pkg="nav2d_karto" type="mapper">
-		<remap from="scan" to="scan"/>
-		<rosparam file="$(find nav2d_tutorials)/param/mapper.yaml"/>
-	</node> -->
-
-  <node name="Navigator" pkg="nav2d_navigator" type="navigator">
-		<rosparam file="$(find nav2d_tutorials)/param/navigator.yaml"/>
-	</node>
-
-  
-
-  <node name="GetMap" pkg="nav2d_navigator" type="get_map_client" />
-  <node name="Explore" pkg="nav2d_navigator" type="explore_client" />
-  <node name="SetGoal" pkg="nav2d_navigator" type="set_goal_client" />
-
 </launch>
