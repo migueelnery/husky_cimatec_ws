@@ -21,7 +21,7 @@ topics:
   priority: 8
 - name    : ajuste
   topic   : cmd_vel_ajustment
-  timeout : 0.5
+  timeout : 1.0
   priority: 9
 locks:
 - name    : e_stop
