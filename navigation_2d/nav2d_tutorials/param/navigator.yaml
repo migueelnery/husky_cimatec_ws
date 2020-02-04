@@ -21,8 +21,8 @@ navigation_homing_distance: 5
 exploration_goal_distance: 2
 
 # Replanning period (set any to 0 to ignore)
-min_replanning_period: 3
-max_replanning_period: 6.0
+min_replanning_period: 7
+max_replanning_period: 0
 
 # Strategy MinPos
 min_target_area_size: 5.0 #1.0
