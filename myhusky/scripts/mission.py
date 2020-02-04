@@ -42,7 +42,7 @@ class Challenge:
     # odometry topic subscription
     #rospy.Subscriber('/odometry/filtered', Odometry, self.callback_odometry)
     # image publisher object
-    self.image_pub = rospy.Publisher('camera/mission', Image, queue_size=10)
+    self.image_pub = rospy.Publisher('camera/mission', Image, queue_size=1)
     # cmd_vel publisher object
     #self.velocity_publisher = rospy.Publisher('cmd_vel', Twist, queue_size=10)
     # get camera info
@@ -66,11 +66,11 @@ class Challenge:
     self.controller_flag = False
     self.error_distance = 999
     
-    time.sleep(1)
+    #time.sleep(1)
     self.start_map.publish()
-    time.sleep(5)
-    self.cancel_map.publish()
     time.sleep(2)
+    self.cancel_map.publish()
+    time.sleep(1)
     self.start_explore.publish()
 
 
@@ -169,14 +169,15 @@ class Challenge:
     distance = (1 * self.focalLength) / (radius * 2)
     y_move_base = -(center_ball - self.camera_info.width/2) / (radius*2) 
     x_move_base = math.sqrt(distance**2 - y_move_base**2)
-    self.distance_filtered = 0.7*self.distance_filtered + 0.3*distance
-    self.x_move_base_filtered = 0.7*self.x_move_base_filtered + 0.3*x_move_base
-    self.y_move_base_filtered = 0.7*self.y_move_base_filtered + 0.3*y_move_base
+    self.distance_filtered = 0.6*self.distance_filtered + 0.4*distance
+    self.x_move_base_filtered = 0.6*self.x_move_base_filtered + 0.4*x_move_base
+    self.y_move_base_filtered = 0.6*self.y_move_base_filtered + 0.4*y_move_base
     self.msg_move_to_goal.pose.position.x = self.x_move_base_filtered
     self.msg_move_to_goal.pose.position.y = self.y_move_base_filtered
     self.msg_move_to_goal.pose.orientation.w = 1
     self.msg_move_to_goal.header.frame_id = self.camera_info.header.frame_id
-    if self.flag and abs(distance- self.distance_filtered) < 4 and self.distance_filtered > 4:
+    if self.flag and abs(distance- self.distance_filtered) < 7 and self.distance_filtered > 4:
+      #self.cancel_explore.publish()
       self.pub_move_to_goal.publish(self.msg_move_to_goal)
       self.flag = False
       self.timer_flag = time.time()
