@@ -57,11 +57,11 @@ class Robot:
     self.cancel_explore = rospy.Publisher("/Explore/cancel", GoalID, queue_size = 1)
     self.cancel_move_base = rospy.Publisher("/move_base/cancel", GoalID, queue_size = 1)
 
-    time.sleep(1)
+    # time.sleep(1)
     self.start_map.publish()
-    time.sleep(5)
+    time.sleep(1)
     self.cancel_map.publish()
-    time.sleep(2)
+    time.sleep(1)
     self.start_explore.publish()
 
 
@@ -104,7 +104,7 @@ class Robot:
       centers.append(aux1)
       radius.append(aux2)
       ## if the camera find the sphere ##
-      if(len(contours_poly[index]) > 10):
+      if(len(contours_poly[index]) > 8):
         # draw a circle in sphere and put a warning message
         cv2.circle(cv2_frame, (int(centers[index][0]), int(centers[index][1])), int(radius[index]), (0, 0, 255), 5) 
         cv2.putText(cv2_frame, 'yellow ball found!', (20, 130), font, 2, (0, 0, 255), 5)
